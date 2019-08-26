@@ -29,7 +29,7 @@ find . -name "*.xml" | tr '\n' '\0' | xargs -0 grep ${i}   -Rw  | grep -v target
 
 # -e 若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：
 echo -e '\n' >> ${fileName}
-echo '开始打印表所在工程'${i}
+echo '开始打印'+${i}+'表所在工程'
 cat ${fileName}
 echo ${i} '表打印完毕'
 
