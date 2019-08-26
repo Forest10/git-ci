@@ -32,4 +32,5 @@ echo -e '\n' >> ${fileName}
 echo '开始打印表所在工程'${i}
 cat ${fileName}
 echo ${i} '表打印完毕'
+
 done
