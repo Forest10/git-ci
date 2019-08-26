@@ -5,7 +5,6 @@
 # https://python-gitlab.readthedocs.io
 # https://gitpython.readthedocs.io/en/stable/
 
-import os
 import gitlab
 from git import *
 
@@ -70,11 +69,12 @@ def _do_git_clone_or_pull(git_url, to_dir):
     except GitCommandError:
         print('master不存在')
         return
-
+    # 创建remote：
     remote = repo.remote()
+    # 切换master
     repo.heads.master.checkout()
     print('开始执行git master pull')
-    # 创建remote：
+    # 执行pull
     remote.pull()
 
 
