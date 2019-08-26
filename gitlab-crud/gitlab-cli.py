@@ -5,6 +5,9 @@
 # https://python-gitlab.readthedocs.io
 # https://gitpython.readthedocs.io/en/stable/
 
+
+import os
+import time
 import gitlab
 from git import *
 
@@ -42,7 +45,8 @@ class GitlabAPI(object):
 
     def get_projects_by_owned_groups(self, groupId):
         group = self.gl.groups.get(groupId)
-        print(group.description)
+        print('')
+        print('群组名称:{}'.format(group.name))
         projects = group.projects.list()
         result_list = []
         for project in projects:
@@ -93,8 +97,12 @@ def _do_get_all_my_project_master(to_dir):
         projects = local_gitlab.get_projects_by_owned_groups(groupId)
         for sshUrl in projects:
             result_list.append(sshUrl)
-    for git_url in result_list:
-        _do_git_clone_or_pull(git_url, to_dir)
+            _do_git_clone_or_pull(sshUrl, to_dir)
+
+    print('>>>>>>>warning<<<<<<<<')
+    print('共操作{}个工程,请确保自己是管理员或已经加入了所有需搜索工程的权限,否则搜索不完全!!!'.format(len(result_list)))
+    print('>>>>>>>warning<<<<<<<<')
+
 
 
 if __name__ == '__main__':
@@ -102,7 +110,9 @@ if __name__ == '__main__':
     find_dir = os.getenv('HOME') + '/Desktop/py-git'
     # 2.整体做git pull或者clone操作
     _do_get_all_my_project_master(find_dir)
+    # 等待一两秒执行git pull
+    time.sleep(3)
     # 3.定义需要查找的数据库表名,空格分割;
-    tableNameList = 'testhaha'
+    tableNameList = 'dkf_rounds_record'
     # 4.执行搜索
     _find_table_use_in_project(tableNameList, find_dir)
