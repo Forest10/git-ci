@@ -112,6 +112,6 @@ if __name__ == '__main__':
     # 等待一两秒执行git pull
     time.sleep(3)
     # 3.定义需要查找的数据库表名,空格分割;
-    tableNameList = 'testha'
+    tableNameList = 'testhaha'
     # 4.执行搜索
     _find_table_use_in_project(tableNameList, find_dir)

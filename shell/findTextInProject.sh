@@ -21,7 +21,7 @@ fi
 
 for i in ${tableNameList};
 do
-echo  tableName:${i} >> ${fileName}
+echo  text:${i} '所在工程为:' >> ${fileName}
 echo -e '\n' >> ${fileName}
 
 cd ${findDir}
@@ -29,8 +29,8 @@ find . -name $3 | tr '\n' '\0' | xargs -0 grep ${i}   -Rw  | grep -v target | aw
 
 # -e 若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：
 echo -e '\n' >> ${fileName}
-echo '开始打印:'${i}'表所在工程'
+echo '开始打印文本:'${i}'所在工程⬇️'
 cat ${fileName}
-echo ${i} '表打印完毕'
+echo 文本${i} '打印完毕'
 
 done
