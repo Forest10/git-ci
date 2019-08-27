@@ -83,9 +83,9 @@ def _do_git_clone_or_pull(git_url, to_dir):
 
 
 # tableNameList需要查找的数据库表名,空格分割;findDir需要查找的最上层文件夹目录
-def _find_table_use_in_project(tableNameList, findDir):
+def _find_table_use_in_project(tableNameList, findDir, regressionFile='*.xml'):
     print('开始搜索表....' + tableNameList)
-    os.system('../shell/findTableUseInProject.sh ' + tableNameList + ' ' + findDir)
+    os.system('../shell/findTextInProject.sh ' + tableNameList + ' ' + findDir + ' ' + regressionFile)
     print('搜索完毕')
 
 
@@ -104,7 +104,6 @@ def _do_get_all_my_project_master(to_dir):
     print('>>>>>>>warning<<<<<<<<')
 
 
-
 if __name__ == '__main__':
     # 1.定义最终放置所有工程的目标文件夹
     find_dir = os.getenv('HOME') + '/Desktop/py-git'
@@ -113,6 +112,6 @@ if __name__ == '__main__':
     # 等待一两秒执行git pull
     time.sleep(3)
     # 3.定义需要查找的数据库表名,空格分割;
-    tableNameList = 'dkf_rounds_record'
+    tableNameList = 'testha'
     # 4.执行搜索
     _find_table_use_in_project(tableNameList, find_dir)

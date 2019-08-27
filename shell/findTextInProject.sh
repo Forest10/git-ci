@@ -25,7 +25,7 @@ echo  tableName:${i} >> ${fileName}
 echo -e '\n' >> ${fileName}
 
 cd ${findDir}
-find . -name "*.xml" | tr '\n' '\0' | xargs -0 grep ${i}   -Rw  | grep -v target | awk -F '/' '{print $2}' | sort  | uniq >> ${fileName}
+find . -name $3 | tr '\n' '\0' | xargs -0 grep ${i}   -Rw  | grep -v target | awk -F '/' '{print $2}' | sort  | uniq >> ${fileName}
 
 # -e 若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：
 echo -e '\n' >> ${fileName}
