@@ -6,8 +6,8 @@
 # https://gitpython.readthedocs.io/en/stable/
 
 
-import os
 import time
+
 import gitlab
 from git import *
 
@@ -83,9 +83,10 @@ def _do_git_clone_or_pull(git_url, to_dir):
 
 
 # tableNameList需要查找的数据库表名,空格分割;findDir需要查找的最上层文件夹目录
-def _find_table_use_in_project(tableNameList, findDir, regressionFile='*.xml'):
+def _find_table_use_in_project(textList, findDir, regressionFile='*.xml'):
     print('开始搜索表....' + tableNameList)
-    os.system('../shell/findTextInProject.sh ' + tableNameList + ' ' + findDir + ' ' + regressionFile)
+    # textList作为一个整参数做传递
+    os.system('../shell/findTextInProject.sh ' + '\'' + tableNameList + '\'' + ' ' + findDir + ' ' + regressionFile)
     print('搜索完毕')
 
 
@@ -111,7 +112,7 @@ if __name__ == '__main__':
     _do_get_all_my_project_master(find_dir)
     # 等待一两秒执行git pull
     time.sleep(3)
-    # 3.定义需要查找的数据库表名,空格分割;
-    tableNameList = 'testhaha'
+    # 3.定义需要查找的文本,空格分割; 'haha 呵呵'
+    tableNameList = 'haha 呵呵'
     # 4.执行搜索
     _find_table_use_in_project(tableNameList, find_dir)
