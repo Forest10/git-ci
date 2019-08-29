@@ -7,7 +7,7 @@
 
 
 import time
-
+import os
 import gitlab
 from git import *
 
@@ -86,7 +86,7 @@ def _do_git_clone_or_pull(git_url, to_dir):
 def _find_table_use_in_project(textList, findDir, regressionFile='*.xml'):
     print('开始搜索表....' + tableNameList)
     # textList作为一个整参数做传递
-    os.system('../shell/findTextInProject.sh ' + '\'' + tableNameList + '\'' + ' ' + findDir + ' ' + regressionFile)
+    os.system('../shell/findTextInProject.sh ' + '\'' + textList + '\'' + ' ' + findDir + ' ' + regressionFile)
     print('搜索完毕')
 
 
