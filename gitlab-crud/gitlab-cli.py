@@ -14,10 +14,12 @@ from git import *
 ##定义python-gitlab使用的配置名称
 ##https://python-gitlab.readthedocs.io/en/stable/cli.html#configuration
 python_gitlab_conf_name = 'forest10'
+exclude_projects = []
 
 
 class GitlabAPI(object):
     def __init__(self, *args, **kwargs):
+        ##加载python-gitlab配置
         if os.path.exists('/etc/python-gitlab.cfg'):
             self.gl = gitlab.Gitlab.from_config(python_gitlab_conf_name, ['/etc/python-gitlab.cfg'])
         elif os.path.exists(os.getenv('HOME') + '/.python-gitlab.cfg'):
@@ -25,6 +27,15 @@ class GitlabAPI(object):
         else:
             print('You need to make sure there is a file named "/etc/python-gitlab.cfg" or "~/.python-gitlab.cfg"')
             sys.exit(5)
+
+        ##加载忽略的系统配置(比如某个系统不需要检索.因为现在gitlab只能自己退出群组.不能退出项目)
+        if os.path.exists(os.getenv('HOME') + '/.exclude_projects.cfg'):
+            with open(os.getenv('HOME') + '/.exclude_projects.cfg', mode='r', encoding='utf-8') as file_obj:
+                for line in file_obj.readlines():
+                    exclude_projects.append(line.rstrip())
+                print('exclude_projects:{}'.format(exclude_projects))
+        else:
+            print('未发现需要排除的系统配置文件.请确认')
 
     def get_projects_ssh_url(self):
         ## login
@@ -55,16 +66,19 @@ class GitlabAPI(object):
 
 
 def _do_git_clone_or_pull(git_url, to_dir):
-    name = git_url.split('/')[1].split('.')[0]
+    projectName = git_url.split('/')[1].split('.')[0]
+    if exclude_projects.__contains__(projectName):
+        print(projectName + '配置在排除之列.不进行git操作')
+        return
     if to_dir.endswith('/'):
         to_dir = to_dir
     else:
         to_dir = to_dir + '/'
-    to_path = to_dir + name
+    to_path = to_dir + projectName
     if os.path.exists(to_path):
         print(to_path + '已存在')
     else:
-        print(name + '执行clone')
+        print(projectName + '执行clone')
         Repo.clone_from(url=git_url, to_path=to_path)
 
     repo = Repo.init(path=to_path)
@@ -101,6 +115,7 @@ def _do_get_all_my_project_master(to_dir):
     for groupId in groups:
         projects = local_gitlab.get_projects_by_owned_groups(groupId)
         for sshUrl in projects:
+            print('sshUrl:{}'.format(sshUrl))
             result_list.append(sshUrl)
             _do_git_clone_or_pull(sshUrl, to_dir)
 
