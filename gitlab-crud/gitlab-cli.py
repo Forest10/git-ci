@@ -82,11 +82,15 @@ def _do_git_clone_or_pull(git_url, to_dir):
     remote.pull()
 
 
-# tableNameList需要查找的数据库表名,空格分割;findDir需要查找的最上层文件夹目录
-def _find_table_use_in_project(textList, findDir, regressionFile='*.xml'):
-    print('开始搜索表....' + tableNameList)
+# textList需要查找的文本list,空格分割;findDir需要查找的最上层文件夹目录
+def _find_text_use_in_project(textList, findDir, regressionFile='*.xml', ignoreCase='false'):
+    print('开始搜索文本....' + textList)
     # textList作为一个整参数做传递
-    os.system('../shell/findTextInProject.sh ' + '\'' + textList + '\'' + ' ' + findDir + ' ' + regressionFile)
+    os.system('../shell/findTextInProject.sh '
+              + '\'' + textList + '\''
+              + ' ' + findDir
+              + ' ' + regressionFile
+              + ' ' + ignoreCase)
     print('搜索完毕')
 
 
@@ -113,6 +117,6 @@ if __name__ == '__main__':
     # 等待一两秒执行git pull
     time.sleep(3)
     # 3.定义需要查找的文本,空格分割; 'haha 呵呵'
-    tableNameList = 'haha 呵呵'
+    textList = 'haha 呵呵'
     # 4.执行搜索
-    _find_table_use_in_project(tableNameList, find_dir)
+    _find_text_use_in_project(textList, find_dir)

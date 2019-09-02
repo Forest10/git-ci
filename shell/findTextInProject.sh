@@ -16,6 +16,15 @@ fi
 #fi
 
 
+##是否精确查找(shell参数赋值时候等号左右不要有空格)
+grepCmd='-Rw'
+ignoreCase=$4
+if ${ignoreCase}; then
+    grepCmd='-Rw -i'
+    echo '>>>>>>>warning<<<<<<<<'
+    echo '此次查找忽略大小写'
+    echo '>>>>>>>warning<<<<<<<<'
+fi
 for i in ${textList};
 do
 fileName=${resultDir}/${i}.txt
@@ -27,7 +36,7 @@ echo  text:${i} '所在工程为:' >> ${fileName}
 echo -e '\n' >> ${fileName}
 
 cd ${findDir}
-find . -name $3 | tr '\n' '\0' | xargs -0 grep ${i}   -Rw  | grep -v target | awk -F '/' '{print $2}' | sort  | uniq >> ${fileName}
+find . -name $3 | tr '\n' '\0' | xargs -0 grep ${i} ${grepCmd}  | grep -v target | awk -F '/' '{print $2}' | sort  | uniq >> ${fileName}
 
 # -e 若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：
 echo -e '\n' >> ${fileName}
