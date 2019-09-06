@@ -7,7 +7,7 @@
 
 
 import time
-import os
+
 import gitlab
 from git import *
 
@@ -79,7 +79,10 @@ def _do_git_clone_or_pull(git_url, to_dir):
         print(to_path + '已存在')
     else:
         print(projectName + '执行clone')
-        Repo.clone_from(url=git_url, to_path=to_path)
+        try:
+            Repo.clone_from(url=git_url, to_path=to_path)
+        except Exception:
+            print('clone:{}失败,请确认权限!'.format(projectName))
 
     repo = Repo.init(path=to_path)
     try:
