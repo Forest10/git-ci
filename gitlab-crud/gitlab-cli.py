@@ -1,4 +1,4 @@
-# /usr/bin/python
+# /usr/bin/python3
 # coding=utf-8
 
 # 参考
@@ -7,7 +7,7 @@
 
 
 import time
-
+import os
 import gitlab
 from git import *
 
