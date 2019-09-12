@@ -7,7 +7,7 @@
 
 
 import time
-import os
+
 import gitlab
 from git import *
 
@@ -19,7 +19,7 @@ exclude_projects = []
 
 class GitlabAPI(object):
     def __init__(self, *args, **kwargs):
-        ##加载python-gitlab配置
+        ## 加载python-gitlab配置
         if os.path.exists('/etc/python-gitlab.cfg'):
             self.gl = gitlab.Gitlab.from_config(python_gitlab_conf_name, ['/etc/python-gitlab.cfg'])
         elif os.path.exists(os.getenv('HOME') + '/.python-gitlab.cfg'):
@@ -88,20 +88,23 @@ def _do_git_clone_or_pull(git_url, to_dir):
     try:
         repo.git.checkout('master')
     except GitCommandError:
-        print('master不存在')
+        print('{}master不存在'.format(projectName))
         return
     # 创建remote：
     remote = repo.remote()
     # 切换master
     repo.heads.master.checkout()
-    print('开始执行git master pull')
+    print('{}开始执行git master pull'.format(projectName))
     # 执行pull
     remote.pull()
 
 
 # textList需要查找的文本list,空格分割;findDir需要查找的最上层文件夹目录
-def _find_text_use_in_project(textList, findDir, regressionFile='*.xml', ignoreCase='false'):
+def _find_text_use_in_project(textList, findDir, regressionFile='*.*', ignoreCase='true'):
     print('开始搜索文本....' + textList)
+    if (regressionFile.endswith('*')):
+        regressionFile = '\'' + regressionFile + '\''
+
     # textList作为一个整参数做传递
     os.system('../shell/findTextInProject.sh '
               + '\'' + textList + '\''
