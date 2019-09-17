@@ -137,10 +137,10 @@ if __name__ == '__main__':
     # 1.定义最终放置所有工程的目标文件夹
     find_dir = os.getenv('HOME') + '/Desktop/py-git'
     # 2.整体做git pull或者clone操作
-    # _do_get_all_my_project_master(find_dir)
+    _do_get_all_my_project_master(find_dir)
     # 等待一两秒执行git pull
-    # time.sleep(3)
+    time.sleep(3)
     # 3.定义需要查找的文本,空格分割; 'haha 呵呵'
-    # textList = 'Repair_ChainRoomRateEndOfDay f_sys_ConverToBinary f_sys_GetAccDate f_sys_GetAnyTimeEndOfDay f_sys_GetParam p_e_EndOfDayCopyCheckInRecord p_exec_UnlockRoomNo p_r_AccountTransBalance p_r_AccountTransBalance_V2 p_r_CaluDayRoomRate p_r_CaluDayRoomRate_V2 p_r_CaluRoomStatus p_r_CaluWorkInAndAgentRoomNight p_r_CheckInCheckOut p_r_CheckRoomStatusByModify p_r_CloseAccountAccTrans p_r_CloseAccountAccTrans_V2 p_r_FolioHistoryDetails p_r_GenerateRoomStatus p_r_GetCurrentRoomStatusByCity p_r_GetCurrentRoomStatusByCity_V2 p_r_GetCurrentRoomStatusGraph p_r_GetCurrentRoomStatusGraph_V2 p_r_GetCurrentRoomStatus p_r_GetCurrentRoomStatus_V2 p_r_RepairRoomStatus p_rpt_AccAllChainDailyReport p_rpt_AccAllChainDailyReport_v2 p_rpt_AccDailyReport p_rpt_AccMonthReport p_rpt_AccSummary p_rpt_AccWeekReport p_rpt_AgentReport p_rpt_Audit p_rpt_BookDepartFolioDetails p_rpt_BusStatistics p_rpt_BusinessIncomeStatistics p_rpt_BusinessIncomeStatistics_2013-12-31 p_rpt_BusinessIncomeStatistics_BusDaySummary p_rpt_CaluAccDailyReport p_rpt_ChangeRoomDetails p_rpt_CheckInFolioRoomDetails p_rpt_CheckInGuestDetails p_rpt_CheckOutTheListOfTheDayGuests p_rpt_ChkInGuestSummary p_rpt_ComBusStatisticsMonth p_rpt_ComBusStatisticsYear p_rpt_ContinueStayInStatistics p_rpt_FolioRateAndCoupon p_rpt_GetDeducTrans p_rpt_GetTransferTrans p_rpt_IndefiniteRoomRate p_rpt_InvoiceInStatistics p_rpt_LeaseInStatistics p_rpt_OperatingStatement p_rpt_QueryMebCrmRanking p_rpt_QueryMebCrmRanking_V2 p_rpt_QueryMebMediumDetails p_rpt_QueryRoomRate p_rpt_RoomClean p_rpt_RoomFolioByCheckOutAndOpenAcc p_rpt_RoomStatusChangeLog p_rpt_Rpt22 p_rpt_Rpt60 p_rpt_SalesPerformanceDetails p_rpt_SalesPerformanceStatistics p_rpt_SalesPerformanceStatistics_V2 p_rpt_SubAccSummary p_rpt_VoucherInStatistics p_sys_DropColumnWithConstraint p_sys_Init p_sys_RebuildIndex'
+    textList = 'haha 呵呵'
     # 4.执行搜索
     _find_text_use_in_project('Repair_ChainRoomRateEndOfDay', find_dir)
