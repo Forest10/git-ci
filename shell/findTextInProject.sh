@@ -27,9 +27,9 @@ if ${ignoreCase}; then
 fi
 for i in ${textList};
 do
-fileName=${resultDir}/${i}.txt
 
-rm -f ${fileName}
+fileName=${resultDir}/${i}_$5.txt
+
 echo touch ${fileName} at `date`
 touch ${fileName}
 echo  text:${i} '所在工程为:' >> ${fileName}
@@ -46,4 +46,6 @@ echo '开始打印文本:'${i}'所在工程⬇️'
 cat ${fileName}
 echo 文本${i} '打印完毕'
 echo -e '\n'
+rm -f ${fileName}
+
 done

@@ -5,7 +5,7 @@
 # https://python-gitlab.readthedocs.io
 # https://gitpython.readthedocs.io/en/stable/
 
-
+import uuid
 import time
 import os
 import gitlab
@@ -104,13 +104,14 @@ def _find_text_use_in_project(textList, findDir, regressionFile='*.*', ignoreCas
     print('开始搜索文本....' + textList)
     if (regressionFile.endswith('*')):
         regressionFile = '\'' + regressionFile + '\''
-
+    resultFileName = uuid.uuid1().__str__()
     # textList作为一个整参数做传递
     os.system('../shell/findTextInProject.sh '
               + '\'' + textList + '\''
               + ' ' + findDir
               + ' ' + regressionFile
-              + ' ' + ignoreCase)
+              + ' ' + ignoreCase
+              + ' ' + resultFileName)
     print('搜索完毕')
 
 
