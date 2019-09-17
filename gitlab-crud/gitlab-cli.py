@@ -143,4 +143,4 @@ if __name__ == '__main__':
     # 3.定义需要查找的文本,空格分割; 'haha 呵呵'
     textList = 'haha 呵呵'
     # 4.执行搜索
-    _find_text_use_in_project('Repair_ChainRoomRateEndOfDay', find_dir)
+    _find_text_use_in_project(textList, find_dir)
