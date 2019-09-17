@@ -10,10 +10,6 @@ resultDir=${findDir}/../result
 if [[ ! -d "${resultDir}" ]];then
 mkdir -p ${resultDir}
 fi
-# -f 参数判断 $file 是否存在
-#if [[ ! -f ${fileName} ]]; then
-
-#fi
 
 
 ##是否精确查找(shell参数赋值时候等号左右不要有空格)
@@ -27,8 +23,17 @@ if ${ignoreCase}; then
 fi
 for i in ${textList};
 do
+###取生成的result文本后缀
+txtSuffix=$5
+linuxUuidFile=/proc/sys/kernel/random/uuid
+# 如果是
+# shellcheck disable=SC1034
+if [[  -f ${linuxUuidFile} ]]; then
+  echo '使用linux自带uuid作为后缀.'
+  txtSuffix=$(cat ${linuxUuidFile})
+fi
 
-fileName=${resultDir}/${i}_$5.txt
+fileName=${resultDir}/${i}_${txtSuffix}.txt
 
 echo touch ${fileName} at `date`
 touch ${fileName}
