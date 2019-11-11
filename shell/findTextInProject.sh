@@ -61,5 +61,4 @@ cat ${fileName}
 echo 文本${i} '打印完毕'
 echo -e '\n'
 rm -f ${fileName}
-
 done
