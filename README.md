@@ -1,9 +1,6 @@
 
-# git-ci
-====================================
-
-
-
+git-ci
+----------
 ![Build Status](https://img.shields.io/badge/build-sucess-cccfff.svg?style=popout-square&colorA=006699)
 [![License](https://img.shields.io/github/license/Forest10/ss-heroku)](https://img.shields.io/github/license/Forest10/ss-heroku)
 [![GitHub stars](https://img.shields.io/github/stars/Forest10/git-ci)](https://github.com/Forest10/git-ci/stargazers)
